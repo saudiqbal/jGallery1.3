@@ -162,13 +162,13 @@ if(!empty($G_JGALL['gall_items']['total']) && $G_JGALL['gall_items']['total'] > 
       // If you are Viewing one image
       if($G_JGALL['gall_items']['current']['num'] > 1)
       {
-         // « first | prev
+         // Â« first | prev
          $C_JGALL['output_pagelinks'] .= JGALL_TBS(3) . '&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_IMG=' . $G_JGALL['gall_items'][$G_JGALL['gall_items']['directorys']]['name'] . '">' . $C_JGALL['lang_first'] . '</a>&nbsp;&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_IMG=' . $G_JGALL['gall_items']['prev'] . '">' . $C_JGALL['lang_prev'] . '</a>&nbsp;&#124;';
       }
       $C_JGALL['output_pagelinks'] .= JGALL_TBS(3) . '&nbsp;' . str_replace('{CURRENT}',$G_JGALL['gall_items']['current']['num'],str_replace('{TOTAL}',$G_JGALL['gall_items']['images'],$C_JGALL['lang_image_info'])) . '&nbsp;';
       if($G_JGALL['gall_items']['current']['num'] < $G_JGALL['gall_items']['images'])
       {
-         // next | last »
+         // next | last Â»
          $C_JGALL['output_pagelinks'] .= JGALL_TBS(3) . '&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_IMG=' . $G_JGALL['gall_items']['next'] . '">' . $C_JGALL['lang_next'] . '</a>&nbsp;&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'].'&JGALL_IMG=' . $G_JGALL['gall_items']['last'] . '">' . $C_JGALL['lang_last'] . '</a>&nbsp;';
       }
    }
@@ -182,7 +182,7 @@ if(!empty($G_JGALL['gall_items']['total']) && $G_JGALL['gall_items']['total'] > 
          $next = $G_JGALL['current']+1;
          if($G_JGALL['current'] > '1') 
          {
-            // « first | prev
+            // Â« first | prev
             $C_JGALL['output_pagelinks'] .=  JGALL_TBS(3) . '&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_PAGE=1">' . $C_JGALL['lang_first'] . '</a>&nbsp;&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_PAGE=' . $prev . '">' . $C_JGALL['lang_prev'] . '</a>&nbsp;&#124;' ;
          }
          for ($i=1; $i<=$G_JGALL['pages']; $i++) 
@@ -198,7 +198,7 @@ if(!empty($G_JGALL['gall_items']['total']) && $G_JGALL['gall_items']['total'] > 
          }
          if($G_JGALL['current'] < $G_JGALL['pages']) 
          {
-            // next | last »
+            // next | last Â»
             $C_JGALL['output_pagelinks'] .=  JGALL_TBS(3) . '&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_PAGE=' . $next . '">' . $C_JGALL['lang_next'] . '</a>&nbsp;&#124;&nbsp;<a class="JGALL_pagelink" href="' . $G_JGALL['UserGets'] . 'JGALL_DIR=' . $G_JGALL['get']['dir'] . '&JGALL_PAGE=' . $G_JGALL['pages'] . '">' . $C_JGALL['lang_last'] . '</a>&nbsp;';
          } 
       }
@@ -279,8 +279,8 @@ echo JGALL_TBS(3) . '<table cellspacing="' . $C_JGALL['gall_spacing'] . '" borde
 if(!empty($G_JGALL['get']['img']) && file_exists($G_JGALL['inc_path'].$G_JGALL['dir_handle'].$G_JGALL['get']['img']))
 {
    $G_JGALL['show_info'] = 'image';
-   $G_JGALL['image_link_start'] = (eregi($C_JGALL['gall_link2source'],'y')) ? '<a href="' . $G_JGALL['inc_path'] . $G_JGALL['dir_handle'] . $G_JGALL['get']['img'] . '" target="_blank">' : ' ' ;
-   $G_JGALL['image_link_end'] = (eregi($C_JGALL['gall_link2source'],'y')) ? '</a>' : '';
+   $G_JGALL['image_link_start'] = (preg_match("/(".$C_JGALL['gall_link2source'].")/i",'y')) ? '<a href="' . $G_JGALL['inc_path'] . $G_JGALL['dir_handle'] . $G_JGALL['get']['img'] . '" target="_blank">' : ' ' ;
+   $G_JGALL['image_link_end'] = (preg_match("/(".$C_JGALL['gall_link2source'].")/i",'y')) ? '</a>' : '';
    echo JGALL_TBS(4) . '<tr>' . JGALL_TBS(5) . '<td align="center">';
    echo JGALL_TBS(6) . $G_JGALL['image_link_start'] . '<img name="image" ' . JGALL_resize($G_JGALL['gall_items']['current']['info'],$G_JGALL['view_image_size']) . ' border="0" style="' . $G_JGALL['style']['gallery_thumb'] . ';" src="' . $G_JGALL['inc_path'] . 'thumb.php?MaxSize=' . $G_JGALL['view_image_size'] . '&src=' . $G_JGALL['dir_handle'] . $G_JGALL['get']['img'] . '&view=y" alt="' . $C_JGALL['lang_downloadimage'] . ': ' . $G_JGALL['get']['img'] . '">' . $G_JGALL['image_link_end'];
    echo JGALL_TBS(5) .'</td>' . JGALL_TBS(4) . '</tr>';
