@@ -55,24 +55,24 @@ else {
    $destSize[1] = $MaxSize/$srcRatio;
 }
 
-if(eregi($C_JGALL['extentions'],$ext) AND (substr($srcSize['mime'],0,5) == 'image'))
-   if(eregi("jpg|jpeg",$ext)) {
+if(preg_match("/(".$C_JGALL['extentions'].")/i",$ext) AND (substr($srcSize['mime'],0,5) == 'image'))
+   if(preg_match("/(jpg|jpeg)/i",$ext)) {
       $destImage = imageCreateTrueColor($destSize[0],$destSize[1]);
       $srcImage = imageCreateFromJpeg($src);
       imageCopyResampled($destImage, $srcImage, 0, 0, 0, 0,$destSize[0],$destSize[1],$srcSize[0],$srcSize[1]);
-      imageJpeg($destImage,'',80);
+      imageJpeg($destImage,NULL,100);
    } 
-   elseif(eregi("gif",$ext)) {
+   elseif(preg_match("/(gif)/i",$ext)) {
       $destImage = imageCreateTrueColor($destSize[0],$destSize[1]);
       $srcImage = imageCreateFromGIF($src);
       imageCopyResampled($destImage, $srcImage, 0, 0, 0, 0,$destSize[0],$destSize[1],$srcSize[0],$srcSize[1]);
-      imageGIF($destImage,'',80);
+      imageGIF($destImage,NULL,100);
    }
-   elseif(eregi("png",$ext)) {
+   elseif(preg_match("/(png)/i",$ext)) {
       $destImage = imageCreateTrueColor($destSize[0],$destSize[1]);
       $srcImage = imageCreateFromPNG($src);
       imageCopyResampled($destImage, $srcImage, 0, 0, 0, 0,$destSize[0],$destSize[1],$srcSize[0],$srcSize[1]);
-      imagePNG($destImage,'',80);
+      imagePNG($destImage,NULL,0);
    } 
 else {
    die('ongeldige extentie of mime-type.');
