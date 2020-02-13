@@ -30,11 +30,11 @@ function JGALL_ReadDir($dir='',$return='gall',$sort='no')
       {
          if($file != '.' && $file != '..')
          {
-            if(eregi($extentions,JGALL_ext($file)))
+            if(preg_match("/($extentions)/i",JGALL_ext($file)))
             {
                $getimagesize = getimagesize($G_JGALL['inc_path'] . $C_JGALL['gall_dir'] . $dir . $file);
                $mime = explode('/',$getimagesize['mime']);
-               if(eregi($extentions,$mime[1]))
+               if(preg_match("/($extentions)/i",$mime[1]))
                {
                   $images[] = array(
                      'type' => 'image',
@@ -254,7 +254,7 @@ function JGALL_UserGets()
    $UserGets = '?';
    foreach ($_GET as $key => $value) 
    { 
-      if (!eregi('JGALL_',$key)) 
+      if (!preg_match("/JGALL_/i",$key)) 
       { 
          $UserGets .= $key.'=' . strip_tags($value); 
          $UserGets .= ($UserGets) ? '&' : '?'; 
